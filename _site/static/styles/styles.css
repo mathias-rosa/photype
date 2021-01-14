@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+html, body{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+.textline{
+    display: flex;
+    flex-direction: row;
+    padding: 2em;
+    padding-bottom: 0.5em;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1em;
+    align-items: center;
+}
+.textline h2{
+    margin-left: 1em;
+    font-size: 1em;
+}
+
+.line{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 2em;
+    padding-top: 0;
+    padding-bottom: 1em;
+    min-height: 1em;
+}
+
+.phonygle{
+    display: flex;
+    width: fit-line;
+    margin: 1em;
+    margin-bottom: 0;
+    align-items: flex-end;
+    height: 11em;
+    border-bottom: 0.75em solid transparent;
+    padding-bottom: 1em;
+    margin-left: 0;
+    margin-right: 1.5em;
+}
+
+.patern{
+    height: 10em;
+}
+
+.patern img{
+    height: 100%;
+}
+
+.boxes{
+    display: flex;
+    flex-direction: column;
+}
+
+.inbox_box{
+    width: 5em;
+    height: 9em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0.5em;
+}
+
+#boxes_o .inbox_box{
+    margin-left: -3em;
+}
+
+.inbox{
+    width: 3.5em;
+    height: 3.5em;
+    margin-top: 0.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.outbox{
+    width: 2em;
+    height: 2em;
+    position: sticky;
+    margin-left: 0.75em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.outbox img{
+    max-width: 2em;
+    max-height: 2em;
+}
+
+.dot{
+    height: 2em;
+    width: 2em;
+    background-color: #404040;
+    border-radius: 100%;
+    margin-bottom: 2.5em;
+}
+#dot{
+    border-color: transparent;
+}
+
+.inbox img{
+    height: 3.5em;
+    width: 3.5em;
+}
