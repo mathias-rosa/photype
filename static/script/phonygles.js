@@ -325,9 +325,9 @@ let zoomIn = document.querySelector("#zoomIn");
 let zoomOut = document.querySelector("#zoomOut");
 zoomIn.addEventListener('click', () => {
   let phonygle = document.querySelector(".phonygle");
-  phonygle.style.zoom += 0.1;
+  phonygle.style.zoom = (parseInt(phonygle.style.zoom) + 0.1).toString();
 });
-zoomIn.addEventListener('click', () => {
+zoomOut.addEventListener('click', () => {
   let phonygle = document.querySelector(".phonygle");
-  phonygle.style.zoom -= 0.1;
+  phonygle.style.zoom = (parseInt(phonygle.style.zoom) - 0.1).toString();
 });
