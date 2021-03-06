@@ -45,6 +45,7 @@ html, body{
     padding-bottom: 1em;
     margin-left: 0;
     margin-right: 1.5em;
+    zoom: 1;
 }
 
 .patern{
@@ -112,4 +113,28 @@ html, body{
 .inbox img{
     height: 3.5em;
     width: 3.5em;
+}
+
+.buttons{
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    width: 7em;
+    bottom: 2em;
+    right: 2em;
+}
+.buttons div{
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    height: 3em;
+    width: 3em;
+    background: rgba( 255, 255, 255, 0.25 );
+    box-shadow: 0 8px 32px 0 rgb(31 38 135 / 37%);
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    font-family: 'Poppins', sans-serif;
 }

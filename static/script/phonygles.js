@@ -319,3 +319,15 @@ document.addEventListener('keydown', event => {
   }
 });
 
+//zoom
+
+let zoomIn = document.querySelector("#zoomIn");
+let zoomOut = document.querySelector("#zoomOut");
+zoomIn.addEventListener('click', () => {
+  let phonygle = document.querySelector(".phonygle");
+  phonygle.style.zoom += 0.1;
+});
+zoomIn.addEventListener('click', () => {
+  let phonygle = document.querySelector(".phonygle");
+  phonygle.style.zoom -= 0.1;
+});
