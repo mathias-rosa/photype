@@ -28,6 +28,8 @@ function createPhonygle(voyel){
   let outbox = document.createElement("div");
   let outboxIMG = document.createElement("img");
 
+  let listOfPhonygles = document.querySelectorAll(".phonygle");
+
   //appendChild
   let line = linelist();
   if (line === undefined){
@@ -75,6 +77,10 @@ function createPhonygle(voyel){
   inboxDeux.style.display = "none";
   //outbox atributes
   outbox.setAttribute('class', 'outbox');
+
+  if (listOfPhonygles != []){
+    phonygle.style.zoom = parseFloat(window.getComputedStyle(listOfPhonygles[0]).zoom)
+  }
 }
 
 //outbox gen
@@ -324,10 +330,18 @@ document.addEventListener('keydown', event => {
 let zoomIn = document.querySelector("#zoomIn");
 let zoomOut = document.querySelector("#zoomOut");
 zoomIn.addEventListener('click', () => {
-  let phonygle = document.querySelector(".phonygle");
-  phonygle.style.zoom = (parseInt(phonygle.style.zoom) + 0.1).toString();
+  let phonygle = document.querySelectorAll(".phonygle");
+  phonygle.forEach(
+    function(element){
+    element.style.zoom = (parseFloat(window.getComputedStyle(element).zoom) + 0.1).toString();
+    }
+  )
 });
 zoomOut.addEventListener('click', () => {
-  let phonygle = document.querySelector(".phonygle");
-  phonygle.style.zoom = (parseInt(phonygle.style.zoom) - 0.1).toString();
+  let phonygle = document.querySelectorAll(".phonygle");
+  phonygle.forEach(
+    function(element){
+    element.style.zoom = (parseFloat(window.getComputedStyle(element).zoom) - 0.1).toString();
+    }
+  )
 });
