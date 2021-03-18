@@ -325,6 +325,7 @@ document.addEventListener('keydown', event => {
   }
 });
 
+//toolbar
 //zoom
 
 let zoomIn = document.querySelector("#zoomIn");

@@ -15,11 +15,42 @@ html, body{
     font-family: 'Poppins', sans-serif;
     font-size: 1em;
     align-items: center;
+    padding-top: 1em;
 }
 .textline h2{
     margin-left: 1em;
     font-size: 1em;
 }
+
+/*Tool Bar */
+
+.toolBar{
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    height: 4em;
+    padding-left: 2em;
+    background: #ffffff;
+    box-shadow: inset 20px 20px 60px #d9d9d9, inset -20px -20px 60px #ffffff;
+}
+.toolBar div{
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    height: 2em;
+    width: 2em;
+    margin-right: 0.7em;
+    background: rgba( 255, 255, 255, 0.25 );
+    box-shadow: 0 8px 32px 0 rgb(31 38 135 / 37%);
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    border-radius: 7px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    font-family: 'Poppins', sans-serif;
+}
+
+/*Text Box */
 
 .line{
     display: flex;
@@ -113,28 +144,4 @@ html, body{
 .inbox img{
     height: 3.5em;
     width: 3.5em;
-}
-
-.buttons{
-    position: absolute;
-    display: flex;
-    justify-content: space-between;
-    width: 7em;
-    bottom: 2em;
-    right: 2em;
-}
-.buttons div{
-    display: flex;
-    cursor: pointer;
-    align-items: center;
-    justify-content: center;
-    height: 3em;
-    width: 3em;
-    background: rgba( 255, 255, 255, 0.25 );
-    box-shadow: 0 8px 32px 0 rgb(31 38 135 / 37%);
-    backdrop-filter: blur( 4px );
-    -webkit-backdrop-filter: blur( 4px );
-    border-radius: 10px;
-    border: 1px solid rgba( 255, 255, 255, 0.18 );
-    font-family: 'Poppins', sans-serif;
 }
