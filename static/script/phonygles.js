@@ -130,6 +130,7 @@ function addOutline(){
 document.addEventListener('keydown', event => {
     if (event.code === 'Space') {
       let phonygle = document.createElement("div");
+      let listOfPhonygles = document.querySelectorAll(".phonygle");
       let dot = document.createElement("div");
 
       let line = linelist();
@@ -139,6 +140,10 @@ document.addEventListener('keydown', event => {
       phonygle.setAttribute('class', 'phonygle');
       phonygle.setAttribute('id', 'dot');
       dot.setAttribute('class', 'dot');
+
+      if (listOfPhonygles != []){
+        phonygle.style.zoom = parseFloat(window.getComputedStyle(listOfPhonygles[0]).zoom)
+      }
     }
   });
 
