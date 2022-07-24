@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="555">
+
+    <svg y="15" width="100%" height="100%">
+        <svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg">
+                <rect width="35" height="465" />
+                <rect width="200" height="35" />
+        </svg>
+
+        <!-- Underline -->
+
+        <rect 
+            width="235" 
+            height="35" 
+            y="505"
+            class="underline"
+            />
+            
+    </svg>
+    
+
+
+    <svg width="100%" height="100%" x="170">
+
+        <!-- Place Phonygle here -->
+
+        <svg xmlns="http://www.w3.org/2000/svg"  
+            width="435" 
+            height="555"
+            >
+            
+            <!-- Patern -->
+
+            <svg y="15" x="30">
+                
+                <svg height="100%" width="100%">
+                    <rect width="35" height="465" />
+                    <rect width="150" height="35" y="200"/>
+                </svg>
+
+                <!-- Inbox -->
+
+                <svg width="160" height="160" 
+                    overflow="hidden"
+                    x="215"
+                    y="80"
+                    >
+                    <rect width="100%" height="100%" />
+                </svg>
+                <svg width="160" height="160" 
+                    overflow="hidden"
+                    x="215"
+                    y="265"
+                    >
+                    <rect width="100%" height="100%" />
+                </svg>
+            </svg>
+
+            <!-- accent -->
+
+            <svg 
+                width="60" 
+                height="60" 
+                x="95"
+                >
+                <rect width="100%" height="100%" />
+            </svg>
+
+
+            <!-- Underline -->
+
+            <rect 
+                width="100%" 
+                height="35" 
+                y="520"
+                />
+            
+        </svg>
+    </svg>
+
+    
+</svg>
