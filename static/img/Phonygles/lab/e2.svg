@@ -5,7 +5,7 @@
     
     <!-- Patern -->
 
-    <svg y="15" x="30">
+    <svg y="15" x="30" class="patern">
         
         <svg width="100%" height="100%">
             <g clip-path="url(#clip0)" transform="scale(0.925) translate(-583 -124) ">
@@ -20,6 +20,7 @@
             overflow="hidden"
             x="240"
             y="80"
+            class="inbox"
             >
             <rect width="100%" height="100%" />
         </svg>
@@ -35,6 +36,7 @@
     <!-- accent -->
 
     <svg 
+    class="accent"
         width="60" 
         height="60" 
         x="235"
@@ -46,6 +48,7 @@
     <!-- Underline -->
 
     <rect 
+        class="underline"
         width="100%" 
         height="35" 
         y="520"

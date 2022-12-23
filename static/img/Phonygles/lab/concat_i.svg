@@ -19,7 +19,7 @@
     
 
 
-    <svg width="100%" height="100%" x="150">
+    <svg width="100%" height="100%" x="150" class="concatr">
 
         <!-- Place Phonygle here -->
 
@@ -30,8 +30,8 @@
         
             <!-- Patern -->
 
-            <svg y="15" x="30">
-                <svg width="100%" height="100%" class="patern">
+            <svg y="15" x="30" class="patern">
+                <svg width="100%" height="100%">
                     <rect width="35" height="465" />
                     <rect width="200" height="35" />
                 </svg>
@@ -39,14 +39,16 @@
                 <!-- Inbox -->
 
                 <svg width="160" height="160" 
-                    overflow="hidden" id="1" class="inbox"
+                    overflow="hidden" id="1" 
+                    class="inbox"
                     x="100"
                     y="80"
                     >
                     <rect width="100%" height="100%" />
                 </svg>
                 <svg width="160" height="160" 
-                    overflow="hidden" id="2" class="inbox"
+                    overflow="hidden" id="2" 
+                    class="inbox"
                     x="100"
                     y="265"
                     >

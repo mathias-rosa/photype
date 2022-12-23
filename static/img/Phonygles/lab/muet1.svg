@@ -5,7 +5,7 @@
     
     <!-- Patern -->
 
-    <svg y="15" x="5">
+    <svg y="15" x="5" class="patern">
         
         <svg height="100%" width="100%">
             <rect width="35" height="150" 
@@ -19,6 +19,7 @@
             overflow="hidden"
             x="235"
             y="170"
+            class="inbox"
             >
             <rect width="100%" height="100%" />
         </svg>
@@ -28,6 +29,7 @@
     <!-- accent -->
 
     <svg 
+    class="accent"
         width="60" 
         height="60" 
         x="230"
@@ -40,6 +42,7 @@
     <!-- Underline -->
 
     <rect 
+        class="underline"
         width="100%" 
         height="35" 
         y="520"
