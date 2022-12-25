@@ -121,9 +121,12 @@ function addInbox(ib) {
 function addOutline() {
   let phonygleList = document.querySelectorAll(".phonygle");
   let phonygle = phonygleList[phonygleList.length - 1];
+  if (!phonygle) {
+    return;
+  }
   if (phonygle.id !== "dot") {
     if (phonygle.style.borderBottom !== "0.75em solid black") {
-      phonygle.style.borderBottom = "0.755em solid black";
+      phonygle.style.borderBottom = "0.75em solid black";
     } else {
       phonygle.style.borderBottom = "0.75em solid transparent";
     }
@@ -186,8 +189,44 @@ let outbox = ["w", "u", "y"];
 let inbox = ["z", "r", "t", "p", "s", "d", "f", "g", "h", "j", "l", "m", "c", "v", "b", "n", "k"];
 
 function parser(string) {
+  let temp = [];
+  if (string === "") {
+    return;
+  }
   for(i = 0; i < string.length; i++) {
-    if (string[i] === "q") {
+    if (temp.includes("(") || string[i] === "(") {
+      temp.push(string[i]);
+    }
+    if (string[i] === ")") {
+      temp.pop();
+      temp.reverse();
+      for (j = 0; j < temp.length; j++) {
+        if (phonygles.includes(temp[j])) {
+          createPhonygle(temp[j]);
+        }
+        else if (outbox.includes(temp[j])) {
+          addOutbox(temp[j]);
+        }
+        else if (inbox.includes(temp[j])) {
+          addInbox(temp[j]);
+        }
+        else if (temp[j] === "*") {
+          compose();
+        }
+        else if (temp[j] === "_" || temp[j] === ".") {
+          addOutline();
+        }
+      }
+      if (temp.size !== 0)
+      {
+        addOutline();
+      }
+      temp = [];
+    }
+    else if (temp.includes("(")) {
+      continue;
+    }
+    else if (string[i] === "q") {
       createPhonygle("muet");
     }
     else if (string[i] === "k") {
@@ -199,7 +238,7 @@ function parser(string) {
     else if (string[i] === "*") {
       compose();
     }
-    else if (string[i] === "_") {
+    else if (string[i] === "_" || string[i] === ".") {
       addOutline();
     }
     else if (phonygles.includes(string[i])) {
@@ -239,6 +278,10 @@ input.addEventListener("focusout", () => {
 
 input.addEventListener("input", () => {
   clear();
+  if (input.value.slice(-1) === "(") {
+    input.value = input.value += ")";
+    input.setSelectionRange(input.value.length - 1, input.value.length - 1);
+  }
   parser(input.value);
 });
 
