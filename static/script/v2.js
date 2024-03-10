@@ -140,55 +140,87 @@ const makePhonygle = (PhonygleObject) => {
 /* Fonction de rendu */
 
 const parseCommand = (command) => {
-    const PhonygleObject = {
-        pattern: "",
-        inbox: [],
-        outbox: [],
-        reverse: false,
-    };
-    return PhonygleObject;
+    const phonyglesList = [];
+    const tokens = command.split("");
+
+    tokens.forEach((element) => {
+        if (PATERNS.includes(element)) {
+            phonyglesList.push({
+                pattern: element,
+                inbox: [],
+                outbox: [],
+                reverse: false,
+            });
+        } else if (INBOXES.includes(element)) {
+            const lastPhonygle = phonyglesList.pop();
+            // If the last phonygle is undefined, we need to create a new phonygle
+            // If the last phonygle has an inbox of length 2, we need to create a new phonygle
+            if (!lastPhonygle || lastPhonygle.inbox.length >= 2) {
+                // if the last phonygle is not undefined, we need to push it back to the list
+                if (lastPhonygle) {
+                    phonyglesList.push(lastPhonygle);
+                }
+                phonyglesList.push({
+                    pattern: "q",
+                    inbox: [element],
+                    outbox: [],
+                    reverse: false,
+                });
+                return;
+            }
+            lastPhonygle.inbox.push(element);
+            phonyglesList.push(lastPhonygle);
+        }
+    });
+
+    return phonyglesList;
 };
 
-const render = (element) => {
-    const phonygle = makePhonygle({
-        pattern: "a",
-        inbox: ["b", "b"],
-        outbox: ["u"],
-        reverse: true,
+const render = (element, command) => {
+    element.innerHTML = "";
+    parseCommand(command).forEach((phonygle) => {
+        element.appendChild(makePhonygle(phonygle));
     });
-    element.appendChild(phonygle);
-    element.appendChild(
-        makePhonygle({
-            pattern: "e",
-            inbox: ["b", "b"],
-            outbox: ["u"],
-            reverse: true,
-        })
-    );
-    element.appendChild(
-        makePhonygle({
-            pattern: "i",
-            inbox: ["b", "b"],
-            outbox: ["u"],
-            reverse: true,
-        })
-    );
-    element.appendChild(
-        makePhonygle({
-            pattern: "o",
-            inbox: ["b"],
-            outbox: ["u"],
-            reverse: true,
-        })
-    );
-    element.appendChild(
-        makePhonygle({
-            pattern: "q",
-            inbox: ["b", "b"],
-            outbox: ["u"],
-            reverse: true,
-        })
-    );
+
+    // const phonygle = makePhonygle({
+    //     pattern: "a",
+    //     inbox: ["b", "b"],
+    //     outbox: ["u"],
+    //     reverse: true,
+    // });
+    // element.appendChild(phonygle);
+    // element.appendChild(
+    //     makePhonygle({
+    //         pattern: "e",
+    //         inbox: ["b", "b"],
+    //         outbox: ["u"],
+    //         reverse: true,
+    //     })
+    // );
+    // element.appendChild(
+    //     makePhonygle({
+    //         pattern: "i",
+    //         inbox: ["b", "b"],
+    //         outbox: ["u"],
+    //         reverse: true,
+    //     })
+    // );
+    // element.appendChild(
+    //     makePhonygle({
+    //         pattern: "o",
+    //         inbox: ["b"],
+    //         outbox: ["u"],
+    //         reverse: true,
+    //     })
+    // );
+    // element.appendChild(
+    //     makePhonygle({
+    //         pattern: "q",
+    //         inbox: ["b", "b"],
+    //         outbox: ["u"],
+    //         reverse: true,
+    //     })
+    // );
 };
 
 export { render };

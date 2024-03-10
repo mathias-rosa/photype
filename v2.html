@@ -65,7 +65,11 @@
         });
 
 
-        render(rendered);
+        render(rendered, "");
+
+        input.addEventListener("input", (e) => {
+            render(rendered, e.target.value);
+        });
     </script>
 </body>
 
