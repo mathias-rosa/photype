@@ -1,30 +1,41 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-html, body{
+html,
+body {
     height: 100%;
     width: 100%;
     margin: 0;
 }
 
-.textline{
+.textline {
     display: flex;
     flex-direction: row;
     padding: 2em;
     padding-bottom: 0.5em;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: 1em;
     align-items: center;
     padding-top: 1em;
 }
-.textline h2{
+.textline h2 {
     margin-left: 1em;
     font-size: 1em;
 }
 
+.rendered {
+    display: flex;
+    flex-direction: column;
+    padding: 2em;
+    font-family: "Roboto", sans-serif;
+    font-size: 1em;
+    align-items: flex-start;
+    padding-bottom: 1em;
+}
+
 /*Tool Bar */
 
-.toolBar{
+.toolBar {
     display: flex;
     justify-content: left;
     align-items: center;
@@ -33,7 +44,7 @@ html, body{
     background: #ffffff;
     box-shadow: inset 20px 20px 60px #d9d9d9, inset -20px -20px 60px #ffffff;
 }
-.toolBar div{
+.toolBar div {
     display: flex;
     cursor: pointer;
     align-items: center;
@@ -44,7 +55,7 @@ html, body{
     background: white;
     border-radius: 7px;
     border: solid;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     font-weight: 700;
     user-select: none;
     -moz-user-select: none;
@@ -52,36 +63,34 @@ html, body{
     transition: 190ms ease;
 }
 
-
-.toolBar div:hover{
+.toolBar div:hover {
     color: white;
     background-color: black;
     border-color: black;
 }
 
 input {
-   height: 100%;
-   width: 100%;
-   background: transparent;
-   border: none;
-   font-family: 'Poppins', sans-serif;
-   font-weight: 700;
-   padding-inline: 3%;
-   box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    background: transparent;
+    border: none;
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    padding-inline: 3%;
+    box-sizing: border-box;
 }
 
-input:focus{
+input:focus {
     outline: none;
 }
 
-
 /*Text Box */
 
-.line{
+.line {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     flex-direction: row;
     flex-wrap: wrap;
     padding: 2em;
@@ -90,7 +99,7 @@ input:focus{
     min-height: 1em;
 }
 
-.phonygle{
+.phonygle {
     display: flex;
     width: fit-line;
     margin: 1em;
@@ -104,20 +113,20 @@ input:focus{
     zoom: 1;
 }
 
-.patern{
+.patern {
     height: 10em;
 }
 
-.patern img{
+.patern img {
     height: 100%;
 }
 
-.boxes{
+.boxes {
     display: flex;
     flex-direction: column;
 }
 
-.inbox_box{
+.inbox_box {
     width: 5em;
     height: 9em;
     display: flex;
@@ -127,11 +136,11 @@ input:focus{
     margin-left: 0.5em;
 }
 
-#boxes_o .inbox_box{
+#boxes_o .inbox_box {
     margin-left: -3em;
 }
 
-.inbox{
+.inbox {
     width: 3.5em;
     height: 3.5em;
     margin-top: 0.5em;
@@ -141,7 +150,7 @@ input:focus{
     overflow: hidden;
 }
 
-.outbox{
+.outbox {
     width: 2em;
     height: 2em;
     position: sticky;
@@ -150,23 +159,23 @@ input:focus{
     justify-content: center;
     align-items: center;
 }
-.outbox img{
+.outbox img {
     max-width: 2em;
     max-height: 2em;
 }
 
-.dot{
+.dot {
     height: 2em;
     width: 2em;
     background-color: black;
     border-radius: 100%;
     margin-bottom: 2.5em;
 }
-#dot{
+#dot {
     border-color: transparent;
 }
 
-.inbox img{
+.inbox img {
     height: 3.5em;
     width: 3.5em;
 }
