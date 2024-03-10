@@ -36,6 +36,34 @@
         const rendered = document.querySelector(".rendered");
         const input = document.querySelector("#input");
 
+        const minFontSize = 10;
+        const maxFontSize = 40;
+        let fontSize = 26;
+
+        const applyFontSize = (fontSize) => {
+            rendered.style.height = `${fontSize * 2}px`;
+            rendered.style.gap = `${fontSize / 4}px`;
+        };
+
+        applyFontSize(fontSize);
+
+        const zoomIn = document.querySelector("#zoomIn");
+        const zoomOut = document.querySelector("#zoomOut");
+
+        zoomIn.addEventListener("click", () => {
+            if (fontSize < maxFontSize) {
+                fontSize++;
+            }
+            applyFontSize(fontSize);
+        });
+
+        zoomOut.addEventListener("click", () => {
+            if (fontSize > minFontSize) {
+                fontSize--;
+            }
+            applyFontSize(fontSize);
+        });
+
 
         render(rendered);
     </script>

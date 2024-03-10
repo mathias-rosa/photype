@@ -74,38 +74,52 @@ const makeInbox = (type, of, neighbor = 0) => {
 
 /* Outbox */
 
+/* Reverse */
+
+const addReverse = (base) => {
+    const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    rect.setAttribute("width", "100%");
+    rect.setAttribute("height", "35");
+    rect.setAttribute("y", "520");
+    rect.setAttribute("class", "underline");
+
+    base.appendChild(rect);
+    return base;
+};
+
 /* Création des phonygles */
 
 const makePhonygle = (PhonygleObject) => {
     const options = {
         inbox: PhonygleObject.inbox,
         outbox: PhonygleObject.outbox,
-        underline: PhonygleObject.underline,
+        reverse: PhonygleObject.reverse,
     };
     const base = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    let width;
     let pattern = (() => {
         switch (PhonygleObject.pattern) {
             case "a":
-                base.setAttribute("width", "570");
+                width = "570";
                 return makePatternA();
             case "e":
-                base.setAttribute("width", "460");
+                width = "460";
                 return makePatternE();
             case "i":
-                base.setAttribute("width", "435");
+                width = "435";
                 return makePatternI();
             case "o":
-                base.setAttribute("width", "350");
+                width = "350";
                 return makePatternO();
             case "q":
-                base.setAttribute("width", "425");
+                width = "425";
                 return makePatternSilent();
             default:
                 return undefined;
         }
     })();
 
-    base.setAttribute("height", "555");
+    base.setAttribute("viewBox", `0 0 ${width} 555`);
 
     if (options.inbox && options.inbox.length === 1) {
         pattern.appendChild(makeInbox("b", PhonygleObject.pattern));
@@ -115,6 +129,10 @@ const makePhonygle = (PhonygleObject) => {
     }
 
     base.appendChild(pattern);
+
+    if (options.reverse) {
+        addReverse(base);
+    }
 
     return base;
 };
@@ -126,7 +144,7 @@ const parseCommand = (command) => {
         pattern: "",
         inbox: [],
         outbox: [],
-        underline: false,
+        reverse: false,
     };
     return PhonygleObject;
 };
@@ -136,7 +154,7 @@ const render = (element) => {
         pattern: "a",
         inbox: ["b", "b"],
         outbox: ["u"],
-        underline: true,
+        reverse: true,
     });
     element.appendChild(phonygle);
     element.appendChild(
@@ -144,7 +162,7 @@ const render = (element) => {
             pattern: "e",
             inbox: ["b", "b"],
             outbox: ["u"],
-            underline: true,
+            reverse: true,
         })
     );
     element.appendChild(
@@ -152,7 +170,7 @@ const render = (element) => {
             pattern: "i",
             inbox: ["b", "b"],
             outbox: ["u"],
-            underline: true,
+            reverse: true,
         })
     );
     element.appendChild(
@@ -160,7 +178,7 @@ const render = (element) => {
             pattern: "o",
             inbox: ["b"],
             outbox: ["u"],
-            underline: true,
+            reverse: true,
         })
     );
     element.appendChild(
@@ -168,7 +186,7 @@ const render = (element) => {
             pattern: "q",
             inbox: ["b", "b"],
             outbox: ["u"],
-            underline: true,
+            reverse: true,
         })
     );
 };
