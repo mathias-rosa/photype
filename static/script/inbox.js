@@ -384,7 +384,7 @@ const makeInboxS = (base) => {
     const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
 
     // Configuration des attributs
-    clipPath.setAttribute("id", "clip0");
+    clipPath.setAttribute("id", "pathInboxS");
     rect.setAttribute("x", "13");
     rect.setAttribute("y", "509");
     rect.setAttribute("width", "171");
@@ -398,7 +398,7 @@ const makeInboxS = (base) => {
     // Attribution de la structure
     clipPath.appendChild(rect);
     defs.appendChild(clipPath);
-    g.setAttribute("clip-path", "url(#clip0)");
+    g.setAttribute("clip-path", "url(pathInboxS)");
     g.setAttribute("transform", "translate(-13 -460)");
     g.setAttribute("style", "padding-top: 30%;");
     g.appendChild(path);
@@ -439,7 +439,6 @@ const makeInboxV = (base) => {
         "http://www.w3.org/2000/svg",
         "rect"
     );
-    rect1.setAttribute("style", "fill: #404040");
     rect1.setAttribute("height", "24%");
     rect1.setAttribute("width", "70%");
     rect1.setAttribute("x", "15%");

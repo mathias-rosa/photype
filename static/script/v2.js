@@ -127,6 +127,49 @@ const makeInbox = (type, of, neighbor = 0) => {
 
 /* Outbox */
 
+import { makeOutboxU, makeOutboxW, makeOutboxY } from "./outbox.js";
+
+const makeOutbox = (of, type) => {
+    const outbox = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "svg"
+    );
+
+    outbox.setAttribute("width", "60");
+    outbox.setAttribute("height", "60");
+
+    switch (of) {
+        case "a":
+            outbox.setAttribute("x", "295");
+            break;
+        case "e":
+            outbox.setAttribute("x", "235");
+            break;
+        case "i":
+            outbox.setAttribute("x", "95");
+            break;
+        case "o":
+            outbox.setAttribute("x", "260");
+            break;
+        case "q":
+            outbox.setAttribute("x", "230");
+            break;
+    }
+
+    switch (type) {
+        case "u":
+            outbox.appendChild(makeOutboxU());
+            break;
+        case "w":
+            outbox.appendChild(makeOutboxW());
+            break;
+        case "y":
+            outbox.appendChild(makeOutboxY());
+            break;
+    }
+    return outbox;
+};
+
 /* Reverse */
 
 const addReverse = (base) => {
@@ -189,6 +232,11 @@ const makePhonygle = (PhonygleObject) => {
 
     base.appendChild(pattern);
 
+    if (options.outbox) {
+        console.log(makeOutbox(PhonygleObject.pattern, options.outbox));
+        base.appendChild(makeOutbox(PhonygleObject.pattern, options.outbox));
+    }
+
     if (options.reverse) {
         addReverse(base);
     }
@@ -207,7 +255,7 @@ const parseCommand = (command = "") => {
             phonyglesList.push({
                 pattern: token,
                 inbox: [],
-                outbox: [],
+                outbox: "",
                 reverse: false,
             });
         } else if (INBOXES.includes(token)) {
@@ -222,12 +270,19 @@ const parseCommand = (command = "") => {
                 phonyglesList.push({
                     pattern: "q",
                     inbox: [token],
-                    outbox: [],
+                    outbox: "",
                     reverse: false,
                 });
                 return;
             }
             lastPhonygle.inbox.push(token);
+            phonyglesList.push(lastPhonygle);
+        } else if (OUTBOXES.includes(token)) {
+            const lastPhonygle = phonyglesList.pop();
+            if (!lastPhonygle) {
+                return;
+            }
+            lastPhonygle.outbox = token;
             phonyglesList.push(lastPhonygle);
         } else if (token === "_") {
             const lastPhonygle = phonyglesList.pop();
@@ -239,6 +294,7 @@ const parseCommand = (command = "") => {
         }
     });
 
+    console.log(phonyglesList);
     return phonyglesList;
 };
 
@@ -251,7 +307,7 @@ const render = (element, command) => {
     // const phonygle = makePhonygle({
     //     pattern: "a",
     //     inbox: ["b", "b"],
-    //     outbox: ["u"],
+    //     outbox: "u",
     //     reverse: true,
     // });
     // element.appendChild(phonygle);
@@ -259,7 +315,7 @@ const render = (element, command) => {
     //     makePhonygle({
     //         pattern: "e",
     //         inbox: ["b", "b"],
-    //         outbox: ["u"],
+    //         outbox: "u",
     //         reverse: true,
     //     })
     // );
@@ -267,7 +323,7 @@ const render = (element, command) => {
     //     makePhonygle({
     //         pattern: "i",
     //         inbox: ["b", "b"],
-    //         outbox: ["u"],
+    //         outbox: "u",
     //         reverse: true,
     //     })
     // );
@@ -275,7 +331,7 @@ const render = (element, command) => {
     //     makePhonygle({
     //         pattern: "o",
     //         inbox: ["b"],
-    //         outbox: ["u"],
+    //         outbox: "u",
     //         reverse: true,
     //     })
     // );
@@ -283,7 +339,7 @@ const render = (element, command) => {
     //     makePhonygle({
     //         pattern: "q",
     //         inbox: ["b", "b"],
-    //         outbox: ["u"],
+    //         outbox: "u",
     //         reverse: true,
     //     })
     // );
