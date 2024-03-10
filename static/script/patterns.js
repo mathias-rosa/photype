@@ -52,8 +52,15 @@ const makePatternE = () => {
     // Ajout du chemin au groupe
     group.appendChild(path);
 
+    const wrapper = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "svg"
+    );
+
+    wrapper.appendChild(group);
+
     // Ajout du clipPath et du groupe au SVG principal
-    pattern.appendChild(group);
+    pattern.appendChild(wrapper);
 
     return pattern;
 };

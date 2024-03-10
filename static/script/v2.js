@@ -33,7 +33,25 @@ import {
 
 /* Inbox */
 
-import { makeInboxB } from "./inbox.js";
+import {
+    makeInboxB,
+    makeInboxC,
+    makeInboxD,
+    makeInboxF,
+    makeInboxG,
+    makeInboxH,
+    makeInboxJ,
+    makeInboxK,
+    makeInboxL,
+    makeInboxM,
+    makeInboxN,
+    makeInboxP,
+    makeInboxR,
+    makeInboxS,
+    makeInboxT,
+    makeInboxV,
+    makeInboxZ,
+} from "./inbox.js";
 
 const makeInbox = (type, of, neighbor = 0) => {
     const inbox = document.createElementNS("http://www.w3.org/2000/svg", "svg");
@@ -69,7 +87,42 @@ const makeInbox = (type, of, neighbor = 0) => {
     }
     inbox.setAttribute("overflow", "hidden");
 
-    return makeInboxB(inbox);
+    switch (type) {
+        case "b":
+            return makeInboxB(inbox);
+        case "c":
+            return makeInboxC(inbox);
+        case "d":
+            return makeInboxD(inbox);
+        case "f":
+            return makeInboxF(inbox);
+        case "g":
+            return makeInboxG(inbox);
+        case "h":
+            return makeInboxH(inbox);
+        case "j":
+            return makeInboxJ(inbox);
+        case "k":
+            return makeInboxK(inbox);
+        case "l":
+            return makeInboxL(inbox);
+        case "m":
+            return makeInboxM(inbox);
+        case "n":
+            return makeInboxN(inbox);
+        case "p":
+            return makeInboxP(inbox);
+        case "r":
+            return makeInboxR(inbox);
+        case "s":
+            return makeInboxS(inbox);
+        case "t":
+            return makeInboxT(inbox);
+        case "v":
+            return makeInboxV(inbox);
+        case "z":
+            return makeInboxZ(inbox);
+    }
 };
 
 /* Outbox */
@@ -122,10 +175,16 @@ const makePhonygle = (PhonygleObject) => {
     base.setAttribute("viewBox", `0 0 ${width} 555`);
 
     if (options.inbox && options.inbox.length === 1) {
-        pattern.appendChild(makeInbox("b", PhonygleObject.pattern));
+        pattern.appendChild(
+            makeInbox(PhonygleObject.inbox[0], PhonygleObject.pattern)
+        );
     } else if (options.inbox && options.inbox.length === 2) {
-        pattern.appendChild(makeInbox("b", PhonygleObject.pattern, 1));
-        pattern.appendChild(makeInbox("b", PhonygleObject.pattern, 2));
+        pattern.appendChild(
+            makeInbox(PhonygleObject.inbox[0], PhonygleObject.pattern, 1)
+        );
+        pattern.appendChild(
+            makeInbox(PhonygleObject.inbox[1], PhonygleObject.pattern, 2)
+        );
     }
 
     base.appendChild(pattern);
@@ -139,9 +198,9 @@ const makePhonygle = (PhonygleObject) => {
 
 /* Fonction de rendu */
 
-const parseCommand = (command) => {
+const parseCommand = (command = "") => {
     const phonyglesList = [];
-    const tokens = command.split("");
+    const tokens = command.toLowerCase().split("");
 
     tokens.forEach((token) => {
         if (PATERNS.includes(token)) {
