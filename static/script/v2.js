@@ -143,15 +143,15 @@ const parseCommand = (command) => {
     const phonyglesList = [];
     const tokens = command.split("");
 
-    tokens.forEach((element) => {
-        if (PATERNS.includes(element)) {
+    tokens.forEach((token) => {
+        if (PATERNS.includes(token)) {
             phonyglesList.push({
-                pattern: element,
+                pattern: token,
                 inbox: [],
                 outbox: [],
                 reverse: false,
             });
-        } else if (INBOXES.includes(element)) {
+        } else if (INBOXES.includes(token)) {
             const lastPhonygle = phonyglesList.pop();
             // If the last phonygle is undefined, we need to create a new phonygle
             // If the last phonygle has an inbox of length 2, we need to create a new phonygle
@@ -162,13 +162,20 @@ const parseCommand = (command) => {
                 }
                 phonyglesList.push({
                     pattern: "q",
-                    inbox: [element],
+                    inbox: [token],
                     outbox: [],
                     reverse: false,
                 });
                 return;
             }
-            lastPhonygle.inbox.push(element);
+            lastPhonygle.inbox.push(token);
+            phonyglesList.push(lastPhonygle);
+        } else if (token === "_") {
+            const lastPhonygle = phonyglesList.pop();
+            if (!lastPhonygle) {
+                return;
+            }
+            lastPhonygle.reverse = true;
             phonyglesList.push(lastPhonygle);
         }
     });
