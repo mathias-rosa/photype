@@ -47,6 +47,7 @@ import {
     makeInboxT,
     makeInboxV,
     makeInboxZ,
+    makeInboxSpace
 } from "./inbox.js";
 
 const makeInbox = (type, of, neighbor = 0) => {
@@ -118,6 +119,8 @@ const makeInbox = (type, of, neighbor = 0) => {
             return makeInboxV(inbox);
         case "z":
             return makeInboxZ(inbox);
+        case " ":
+            return makeInboxSpace(inbox);
     }
 };
 
@@ -189,7 +192,7 @@ const makePhonygle = (PhonygleObject) => {
         reverse: PhonygleObject.reverse,
     };
     const base = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    let width;
+    let width = 100;
     let pattern = (() => {
         switch (PhonygleObject.pattern) {
             case "a":
@@ -328,6 +331,14 @@ const parseCommand = (command = "") => {
             }
             lastPhonygle.reverse = true;
             phonyglesList.push(lastPhonygle);
+        } else if (token === " ") {
+            phonyglesList.push({
+                pattern: " ",
+                compose: "",
+                inbox: [" ", " "],
+                outbox: "",
+                reverse: false,
+            });
         }
     });
 

@@ -490,6 +490,16 @@ const makeInboxZ = (base) => {
     return base;
 };
 
+const makeInboxSpace = (base) => {
+    const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    rect.setAttribute("height", "100%");
+    rect.setAttribute("width", "0%");
+    rect.setAttribute("fill", "transparent");
+
+    base.appendChild(rect);
+    return base;
+}
+
 export {
     makeInboxB,
     makeInboxC,
@@ -508,4 +518,5 @@ export {
     makeInboxT,
     makeInboxV,
     makeInboxZ,
+    makeInboxSpace
 };

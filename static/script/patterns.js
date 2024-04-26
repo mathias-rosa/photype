@@ -7,7 +7,7 @@ const makePatternA = () => {
 
     pattern.setAttribute("class", "pattern");
     pattern.setAttribute("y", "15");
-    
+
     // Création de l'ellipse extérieure (bordure)
     const outerEllipse = document.createElementNS(
         "http://www.w3.org/2000/svg",
@@ -152,6 +152,18 @@ const makePatternSilent = () => {
     return pattern;
 };
 
+const makePatternSpace = () => {
+    const pattern = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "svg"
+    );
+    pattern.setAttribute("height", "100%");
+    pattern.setAttribute("width", "100");
+    pattern.setAttribute("y", "15");
+
+    return pattern;
+}
+
 const makePattern = (kind) => {
     switch (kind) {
         case "a":
@@ -162,6 +174,8 @@ const makePattern = (kind) => {
             return makePatternI();
         case "o":
             return makePatternO();
+        case " ":
+            return makePatternSpace();
         case "q":
         default:
             return makePatternSilent();
