@@ -273,7 +273,7 @@ const parseCommand = (command = "") => {
     const tokens = command.toLowerCase().split("");
 
 
-    tokens.forEach((token, index) => {
+    tokens.forEach((token) => {
         if (PATERNS.includes(token)) {
             const lastPhonygle = phonyglesList.pop()
 
@@ -331,7 +331,6 @@ const parseCommand = (command = "") => {
         }
     });
 
-    console.log(phonyglesList);
     return phonyglesList;
 };
 
