@@ -24,11 +24,7 @@ const OUTBOXES = ["u", "w", "y"];
 /* Patterns */
 
 import {
-    makePatternA,
-    makePatternE,
-    makePatternI,
-    makePatternO,
-    makePatternSilent,
+    makePattern
 } from "./patterns.js";
 
 /* Inbox */
@@ -187,6 +183,7 @@ const addReverse = (base) => {
 
 const makePhonygle = (PhonygleObject) => {
     const options = {
+        compose: PhonygleObject.compose,
         inbox: PhonygleObject.inbox,
         outbox: PhonygleObject.outbox,
         reverse: PhonygleObject.reverse,
@@ -196,24 +193,46 @@ const makePhonygle = (PhonygleObject) => {
     let pattern = (() => {
         switch (PhonygleObject.pattern) {
             case "a":
-                width = "500";
-                return makePatternA();
+                width = 500;
+                break;
             case "e":
-                width = "430";
-                return makePatternE();
+                width = 430;
+                break;
             case "i":
-                width = "405";
-                return makePatternI();
+                width = 405;
+                break;
             case "o":
-                width = "300";
-                return makePatternO();
+                width = 300;
+                break;
             case "q":
-                width = "395";
-                return makePatternSilent();
-            default:
-                return undefined;
+                width = 395;
+                break;
         }
+        return makePattern(PhonygleObject.pattern);
     })();
+
+    let offset = 0;
+    if (options.compose) {
+        switch (options.compose) {
+            case "a":
+            case "o":
+                offset = 200
+                width += 200;
+                break;
+            case "e":
+                offset = 160
+                width += 160;
+                break;
+            case "i":
+                offset = 150
+                width += 150;
+                break;
+            default:
+                break;
+        }
+        const compose = makePattern(options.compose);
+        base.appendChild(compose);
+    }
 
     base.setAttribute("viewBox", `0 0 ${width} 555`);
 
@@ -230,11 +249,14 @@ const makePhonygle = (PhonygleObject) => {
         );
     }
 
+    pattern.setAttribute("x", offset - 5);
+
     base.appendChild(pattern);
 
     if (options.outbox) {
-        console.log(makeOutbox(PhonygleObject.pattern, options.outbox));
-        base.appendChild(makeOutbox(PhonygleObject.pattern, options.outbox));
+        const outbox = makeOutbox(PhonygleObject.pattern, options.outbox);
+        outbox.setAttribute("x", width - 60);
+        base.appendChild(outbox);
     }
 
     if (options.reverse) {
@@ -250,14 +272,28 @@ const parseCommand = (command = "") => {
     const phonyglesList = [];
     const tokens = command.toLowerCase().split("");
 
-    tokens.forEach((token) => {
+
+    tokens.forEach((token, index) => {
         if (PATERNS.includes(token)) {
+            const lastPhonygle = phonyglesList.pop()
+
+            // Gère la composition de patterns
+            let toCompose = ""
+            if (lastPhonygle && lastPhonygle.inbox.length === 0) {
+                toCompose = lastPhonygle.pattern
+            } else if (lastPhonygle) {
+                phonyglesList.push(lastPhonygle)
+            }
+            
+
             phonyglesList.push({
                 pattern: token,
+                compose: toCompose,
                 inbox: [],
                 outbox: "",
                 reverse: false,
             });
+            toCompose = ""
         } else if (INBOXES.includes(token)) {
             const lastPhonygle = phonyglesList.pop();
             // If the last phonygle is undefined, we need to create a new phonygle
@@ -269,6 +305,7 @@ const parseCommand = (command = "") => {
                 }
                 phonyglesList.push({
                     pattern: "q",
+                    compose: "",
                     inbox: [token],
                     outbox: "",
                     reverse: false,
@@ -305,8 +342,9 @@ const render = (element, command) => {
     });
 
     // const phonygle = makePhonygle({
-    //     pattern: "a",
-    //     inbox: ["b", "b"],
+    //     pattern: "o",
+    //     compose: "i",
+    //     inbox: ["f", "d"],
     //     outbox: "u",
     //     reverse: true,
     // });

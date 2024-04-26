@@ -1,32 +1,3 @@
-// const makePatternA = () => {
-//     const pattern = document.createElementNS(
-//         "http://www.w3.org/2000/svg",
-//         "svg"
-//     );
-//     pattern.setAttribute("y", "15");
-//     pattern.setAttribute("x", "30");
-//     pattern.setAttribute("class", "pattern");
-
-//     const patternRect1 = document.createElementNS(
-//         "http://www.w3.org/2000/svg",
-//         "rect"
-//     );
-//     patternRect1.setAttribute("width", "35");
-//     patternRect1.setAttribute("height", "465");
-//     patternRect1.setAttribute("x", "200");
-
-//     const patternRect2 = document.createElementNS(
-//         "http://www.w3.org/2000/svg",
-//         "rect"
-//     );
-//     patternRect2.setAttribute("width", "200");
-//     patternRect2.setAttribute("height", "35");
-
-//     pattern.appendChild(patternRect1);
-//     pattern.appendChild(patternRect2);
-
-//     return pattern;
-// };
 const makePatternA = () => {
     // Création du motif SVG
     const pattern = document.createElementNS(
@@ -35,7 +6,8 @@ const makePatternA = () => {
     );
 
     pattern.setAttribute("class", "pattern");
-
+    pattern.setAttribute("y", "15");
+    
     // Création de l'ellipse extérieure (bordure)
     const outerEllipse = document.createElementNS(
         "http://www.w3.org/2000/svg",
@@ -64,6 +36,7 @@ const makePatternE = () => {
     );
     pattern.setAttribute("width", "100%");
     pattern.setAttribute("height", "100%");
+    pattern.setAttribute("y", "15");
 
     // Création du groupe
     const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
@@ -102,6 +75,7 @@ const makePatternI = () => {
     );
     pattern.setAttribute("height", "100%");
     pattern.setAttribute("width", "100%");
+    pattern.setAttribute("y", "15");
     pattern.setAttribute("xmlns", "http://www.w3.org/2000/svg");
 
     // Création du premier rectangle
@@ -164,6 +138,7 @@ const makePatternSilent = () => {
     );
     pattern.setAttribute("height", "100%");
     pattern.setAttribute("width", "100%");
+    pattern.setAttribute("y", "15");
 
     // Création du rectangle
     const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
@@ -177,10 +152,22 @@ const makePatternSilent = () => {
     return pattern;
 };
 
+const makePattern = (kind) => {
+    switch (kind) {
+        case "a":
+            return makePatternA();
+        case "e":
+            return makePatternE();
+        case "i":
+            return makePatternI();
+        case "o":
+            return makePatternO();
+        case "q":
+        default:
+            return makePatternSilent();
+    }
+}
+
 export {
-    makePatternA,
-    makePatternE,
-    makePatternI,
-    makePatternO,
-    makePatternSilent,
+    makePattern
 };
