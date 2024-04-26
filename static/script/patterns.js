@@ -1,32 +1,60 @@
+// const makePatternA = () => {
+//     const pattern = document.createElementNS(
+//         "http://www.w3.org/2000/svg",
+//         "svg"
+//     );
+//     pattern.setAttribute("y", "15");
+//     pattern.setAttribute("x", "30");
+//     pattern.setAttribute("class", "pattern");
+
+//     const patternRect1 = document.createElementNS(
+//         "http://www.w3.org/2000/svg",
+//         "rect"
+//     );
+//     patternRect1.setAttribute("width", "35");
+//     patternRect1.setAttribute("height", "465");
+//     patternRect1.setAttribute("x", "200");
+
+//     const patternRect2 = document.createElementNS(
+//         "http://www.w3.org/2000/svg",
+//         "rect"
+//     );
+//     patternRect2.setAttribute("width", "200");
+//     patternRect2.setAttribute("height", "35");
+
+//     pattern.appendChild(patternRect1);
+//     pattern.appendChild(patternRect2);
+
+//     return pattern;
+// };
 const makePatternA = () => {
+    // Création du motif SVG
     const pattern = document.createElementNS(
         "http://www.w3.org/2000/svg",
         "svg"
     );
-    pattern.setAttribute("y", "15");
-    pattern.setAttribute("x", "30");
+
     pattern.setAttribute("class", "pattern");
 
-    const patternRect1 = document.createElementNS(
+    // Création de l'ellipse extérieure (bordure)
+    const outerEllipse = document.createElementNS(
         "http://www.w3.org/2000/svg",
-        "rect"
+        "ellipse"
     );
-    patternRect1.setAttribute("width", "35");
-    patternRect1.setAttribute("height", "465");
-    patternRect1.setAttribute("x", "200");
+    outerEllipse.setAttribute("cx", "120");
+    outerEllipse.setAttribute("cy", "250");
+    outerEllipse.setAttribute("rx", "100"); 
+    outerEllipse.setAttribute("ry", "232.5"); 
+    outerEllipse.setAttribute("fill", "none"); 
+    outerEllipse.setAttribute("stroke", "black"); // Couleur de la bordure
+    outerEllipse.setAttribute("stroke-width", "35"); // Épaisseur de la bordure
 
-    const patternRect2 = document.createElementNS(
-        "http://www.w3.org/2000/svg",
-        "rect"
-    );
-    patternRect2.setAttribute("width", "200");
-    patternRect2.setAttribute("height", "35");
-
-    pattern.appendChild(patternRect1);
-    pattern.appendChild(patternRect2);
+    // Ajout des ellipses au motif
+    pattern.appendChild(outerEllipse);
 
     return pattern;
 };
+
 
 const makePatternE = () => {
     // Création de l'élément SVG principal
@@ -107,7 +135,6 @@ const makePatternO = () => {
         "svg"
     );
     pattern.setAttribute("y", "15");
-    pattern.setAttribute("x", "30");
     pattern.setAttribute("class", "pattern");
 
     const patternRect1 = document.createElementNS(

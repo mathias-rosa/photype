@@ -196,19 +196,19 @@ const makePhonygle = (PhonygleObject) => {
     let pattern = (() => {
         switch (PhonygleObject.pattern) {
             case "a":
-                width = "570";
+                width = "500";
                 return makePatternA();
             case "e":
-                width = "460";
+                width = "430";
                 return makePatternE();
             case "i":
-                width = "435";
+                width = "405";
                 return makePatternI();
             case "o":
-                width = "350";
+                width = "300";
                 return makePatternO();
             case "q":
-                width = "425";
+                width = "395";
                 return makePatternSilent();
             default:
                 return undefined;
