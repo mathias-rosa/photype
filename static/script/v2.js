@@ -324,7 +324,7 @@ const parseCommand = (command = "") => {
             }
             lastPhonygle.outbox = token;
             phonyglesList.push(lastPhonygle);
-        } else if (token === "_") {
+        } else if (token === "*" || token === "µ" || token == "_" || token==="²") {
             const lastPhonygle = phonyglesList.pop();
             if (!lastPhonygle) {
                 return;
@@ -392,5 +392,6 @@ const render = (element, command) => {
     //     })
     // );
 };
+
 
 export { render };

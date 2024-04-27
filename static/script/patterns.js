@@ -14,9 +14,9 @@ const makePatternA = () => {
         "ellipse"
     );
     outerEllipse.setAttribute("cx", "120");
-    outerEllipse.setAttribute("cy", "250");
+    outerEllipse.setAttribute("cy", "235");
     outerEllipse.setAttribute("rx", "100"); 
-    outerEllipse.setAttribute("ry", "232.5"); 
+    outerEllipse.setAttribute("ry", "215"); 
     outerEllipse.setAttribute("fill", "none"); 
     outerEllipse.setAttribute("stroke", "black"); // Couleur de la bordure
     outerEllipse.setAttribute("stroke-width", "35"); // Épaisseur de la bordure
