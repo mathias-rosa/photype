@@ -42,7 +42,7 @@
 
         const applyFontSize = (fontSize) => {
             rendered.style.height = `${fontSize * 2}px`;
-            rendered.style.gap = `${fontSize / 4}px`;
+            rendered.style.gap = `${Math.log(fontSize) * 2}px`;
         };
 
         applyFontSize(fontSize);
