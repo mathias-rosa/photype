@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <title>Phonygles</title>
     <link href="./static/styles/styles.css" rel="stylesheet">
     <link rel='shortcut icon' type='image/x-icon' href='./static/favicon.ico' />
 </head>
+
 <body>
     <div class="textline">
 
@@ -17,17 +19,58 @@
     </div>
 
     <div class="toolBar">
-        <div id="zoomOut">-</div>
-        <div id="zoomIn">+</div>
-        <div id="clear">🗑️</div>
+        <div id="zoomOut" class="command">-</div>
+        <div id="zoomIn" class="command">+</div>
+        <div id="clear" class="command">🗑️</div>
         <input type="text" id="input" placeholder="Write here" inputmode="text">
 
     </div>
 
     <div class="workspace"></div>
+    <div class="rendered"></div>
 
 
-<script src="./static/script/phonygles.js"></script>
+    <script type="module">
+        import { render } from './static/script/phonygles.js';
+
+        const rendered = document.querySelector(".rendered");
+        const input = document.querySelector("#input");
+
+        const minFontSize = 10;
+        const maxFontSize = 250;
+        let fontSize = 60;
+
+        const applyFontSize = (fontSize) => {
+            rendered.style.height = `${fontSize * 2}px`;
+            rendered.style.gap = `${fontSize / 4}px`;
+        };
+
+        applyFontSize(fontSize);
+
+        const zoomIn = document.querySelector("#zoomIn");
+        const zoomOut = document.querySelector("#zoomOut");
+
+        zoomIn.addEventListener("click", () => {
+            if (fontSize < maxFontSize) {
+                fontSize++;
+            }
+            applyFontSize(fontSize);
+        });
+
+        zoomOut.addEventListener("click", () => {
+            if (fontSize > minFontSize) {
+                fontSize--;
+            }
+            applyFontSize(fontSize);
+        });
+
+
+        render(rendered, "");
+
+        input.addEventListener("input", (e) => {
+            render(rendered, e.target.value);
+        });
+    </script>
 </body>
 
 </html>

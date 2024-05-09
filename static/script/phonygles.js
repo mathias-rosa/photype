@@ -1,471 +1,397 @@
-//line gen
+/* Variables globales */
+const PATERNS = ["a", "e", "i", "o", "q"];
+const INBOXES = [
+    "b",
+    "c",
+    "d",
+    "f",
+    "g",
+    "h",
+    "j",
+    "k",
+    "l",
+    "m",
+    "n",
+    "p",
+    "r",
+    "s",
+    "t",
+    "v",
+    "z",
+];
+const OUTBOXES = ["u", "w", "y"];
 
-function createline() {
-  let workspace = document.querySelector(".workspace");
-  let line = document.createElement("div");
-  line.setAttribute("class", "line");
-  workspace.appendChild(line);
-}
+/* Patterns */
 
-createline();
+import {
+    makePattern
+} from "./patterns.js";
 
-function linelist() {
-  let linelist = document.querySelectorAll(".line");
-  return linelist[linelist.length - 1];
-}
+/* Inbox */
 
-//patern gen
+import {
+    makeInboxB,
+    makeInboxC,
+    makeInboxD,
+    makeInboxF,
+    makeInboxG,
+    makeInboxH,
+    makeInboxJ,
+    makeInboxK,
+    makeInboxL,
+    makeInboxM,
+    makeInboxN,
+    makeInboxP,
+    makeInboxR,
+    makeInboxS,
+    makeInboxT,
+    makeInboxV,
+    makeInboxZ,
+    makeInboxSpace
+} from "./inbox.js";
 
-function createPhonygle(voyel) {
-  let phonygle = document.createElement("div");
-  let patern = document.createElement("div");
-  let paternIMG = document.createElement("img");
-  let boxes = document.createElement("div");
-  let inbox_box = document.createElement("div");
-  let inboxUn = document.createElement("div");
-  let inboxDeux = document.createElement("div");
-  let outbox = document.createElement("div");
-  let outboxIMG = document.createElement("img");
-
-  let listOfPhonygles = document.querySelectorAll(".phonygle");
-
-  //appendChild
-  let line = linelist();
-  if (line === undefined) {
-    createline();
-    line = linelist();
-  }
-  line.appendChild(phonygle);
-  phonygle.appendChild(patern);
-  patern.appendChild(paternIMG);
-
-  phonygle.appendChild(boxes);
-
-  boxes.appendChild(outbox);
-  outbox.appendChild(outboxIMG);
-
-  boxes.appendChild(inbox_box);
-  inbox_box.appendChild(inboxUn);
-
-  inbox_box.appendChild(inboxDeux);
-
-  //phonygles atributes
-  phonygle.setAttribute("class", "phonygle");
-  if (voyel !== "o") {
-    phonygle.setAttribute("id", "boxes_classic");
-  } else {
-    phonygle.setAttribute("id", "boxes_o");
-  }
-  //patern atributes
-  patern.setAttribute("class", "patern");
-  paternIMG.style.display = "block";
-  paternIMG.setAttribute(
-    "src",
-    "static/img/Phonygles/paterns/" + voyel + ".svg"
-  );
-  paternIMG.setAttribute("alt", voyel);
-  //boxes atributes
-  boxes.setAttribute("class", "boxes");
-  //inbox atributes
-  inbox_box.setAttribute("class", "inbox_box");
-  inboxUn.setAttribute("class", "inbox");
-  inboxUn.setAttribute("id", "vacant");
-  inboxUn.style.display = "flex";
-  inboxDeux.setAttribute("class", "inbox");
-  inboxDeux.setAttribute("id", "vacant");
-  inboxDeux.style.display = "none";
-  //outbox atributes
-  outbox.setAttribute("class", "outbox");
-
-  if (listOfPhonygles != []) {
-    try {
-      phonygle.style.zoom = parseFloat(
-        window.getComputedStyle(listOfPhonygles[0]).zoom
-      );
-    } catch (error) {
-      
+const makeInbox = (type, of, neighbor = 0) => {
+    const inbox = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    inbox.setAttribute("width", "160");
+    inbox.setAttribute("height", "160");
+    switch (of) {
+        case "a":
+            inbox.setAttribute("x", "300");
+            break;
+        case "e":
+            inbox.setAttribute("x", "240");
+            break;
+        case "i":
+            inbox.setAttribute("x", "215");
+            break;
+        case "o":
+            inbox.setAttribute("x", "100");
+            break;
+        case "q":
+            inbox.setAttribute("x", "235");
+            break;
     }
-  }
-}
-
-//outbox gen
-
-function addOutbox(ob) {
-  let boxesList = document.querySelectorAll(".boxes");
-  let boxes = boxesList[boxesList.length - 1];
-  let outboxIMG = boxes.querySelector(".outbox img");
-  outboxIMG.style.display = "block";
-  outboxIMG.setAttribute("src", "static/img/Phonygles/outbox/" + ob + ".svg");
-}
-
-//inbox gen
-
-function addInbox(ib) {
-  let inboxList = document.querySelectorAll(".inbox");
-  let inboxUn = inboxList[inboxList.length - 2];
-  let inboxDeux = inboxList[inboxList.length - 1];
-  if (inboxUn.id === "vacant") {
-    let inboxIMG = document.createElement("img");
-    inboxUn.appendChild(inboxIMG);
-    inboxIMG.setAttribute("src", "static/img/Phonygles/inbox/" + ib + ".svg");
-    inboxUn.setAttribute("id", "no_vacancy");
-  } else if (inboxDeux.id === "vacant") {
-    inboxDeux.style.display = "flex";
-    let inboxIMG = document.createElement("img");
-    inboxDeux.appendChild(inboxIMG);
-    inboxIMG.setAttribute("src", "static/img/Phonygles/inbox/" + ib + ".svg");
-    inboxDeux.setAttribute("id", "no_vacancy");
-  }
-}
-
-function addOutline() {
-  let phonygleList = document.querySelectorAll(".phonygle");
-  let phonygle = phonygleList[phonygleList.length - 1];
-  if (!phonygle) {
-    return;
-  }
-  if (phonygle.id !== "dot") {
-    if (phonygle.style.borderBottom !== "0.75em solid black") {
-      phonygle.style.borderBottom = "0.75em solid black";
-    } else {
-      phonygle.style.borderBottom = "0.75em solid transparent";
+    switch (neighbor) {
+        case 0:
+            inbox.setAttribute("y", "170");
+            break;
+        case 1:
+            inbox.setAttribute("y", "80");
+            break;
+        case 2:
+            inbox.setAttribute("y", "265");
+            break;
     }
-  }
-}
+    inbox.setAttribute("overflow", "hidden");
 
-function newSpace() {
-  let phonygle = document.createElement("div");
-  let listOfPhonygles = document.querySelectorAll(".phonygle");
-  let dot = document.createElement("div");
-
-  let line = linelist();
-  line.appendChild(phonygle);
-  phonygle.appendChild(dot);
-
-  phonygle.setAttribute("class", "phonygle");
-  phonygle.setAttribute("id", "dot");
-  dot.setAttribute("class", "dot");
-
-  if (listOfPhonygles != []) {
-    try {
-      phonygle.style.zoom = parseFloat(
-        window.getComputedStyle(listOfPhonygles[0]).zoom
-      );
-    } catch (error) {
+    switch (type) {
+        case "b":
+            return makeInboxB(inbox);
+        case "c":
+            return makeInboxC(inbox);
+        case "d":
+            return makeInboxD(inbox);
+        case "f":
+            return makeInboxF(inbox);
+        case "g":
+            return makeInboxG(inbox);
+        case "h":
+            return makeInboxH(inbox);
+        case "j":
+            return makeInboxJ(inbox);
+        case "k":
+            return makeInboxK(inbox);
+        case "l":
+            return makeInboxL(inbox);
+        case "m":
+            return makeInboxM(inbox);
+        case "n":
+            return makeInboxN(inbox);
+        case "p":
+            return makeInboxP(inbox);
+        case "r":
+            return makeInboxR(inbox);
+        case "s":
+            return makeInboxS(inbox);
+        case "t":
+            return makeInboxT(inbox);
+        case "v":
+            return makeInboxV(inbox);
+        case "z":
+            return makeInboxZ(inbox);
+        case " ":
+            return makeInboxSpace(inbox);
     }
-    
-  }
-}
+};
 
-function removeLastPhonygle() {
-  let line = linelist();
-  let child = line.lastChild;
-  if (child !== null) {
-    line.removeChild(child);
-    return true;
-  } else {
-    let workspace = document.querySelector(".workspace");
-    if (workspace.childNodes.length > 1)
-    {
-      workspace.removeChild(workspace.lastChild);
-      return true;
+/* Outbox */
+
+import { makeOutboxU, makeOutboxW, makeOutboxY } from "./outbox.js";
+
+const makeOutbox = (of, type) => {
+    const outbox = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "svg"
+    );
+
+    outbox.setAttribute("width", "60");
+    outbox.setAttribute("height", "60");
+
+    switch (of) {
+        case "a":
+            outbox.setAttribute("x", "295");
+            break;
+        case "e":
+            outbox.setAttribute("x", "235");
+            break;
+        case "i":
+            outbox.setAttribute("x", "95");
+            break;
+        case "o":
+            outbox.setAttribute("x", "260");
+            break;
+        case "q":
+            outbox.setAttribute("x", "230");
+            break;
     }
-  }
-  return false;
-}
 
-function compose() {
-  let line = linelist();
-  let phonygle = line.lastChild;
-  if (phonygle.id !== "dot") {
-    let box = phonygle.querySelector(".boxes");
-    phonygle.removeChild(box);
-    phonygle.style.marginRight = "-0.02em";
-  }
-}
-
-let phonygles = ["a", "e", "i", "o", "q"];
-let outbox = ["w", "u", "y"];
-let inbox = ["z", "r", "t", "p", "s", "d", "f", "g", "h", "j", "l", "m", "c", "v", "b", "n", "k"];
-
-function parser(string) {
-  let temp = [];
-  if (string === "") {
-    return;
-  }
-  for(i = 0; i < string.length; i++) {
-    if (temp.includes("(") || string[i] === "(") {
-      temp.push(string[i]);
+    switch (type) {
+        case "u":
+            outbox.appendChild(makeOutboxU());
+            break;
+        case "w":
+            outbox.appendChild(makeOutboxW());
+            break;
+        case "y":
+            outbox.appendChild(makeOutboxY());
+            break;
     }
-    if (string[i] === ")") {
-      temp.pop();
-      temp.reverse();
-      for (j = 0; j < temp.length; j++) {
-        if (phonygles.includes(temp[j])) {
-          createPhonygle(temp[j]);
+    return outbox;
+};
+
+/* Reverse */
+
+const addReverse = (base) => {
+    const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    rect.setAttribute("width", "100%");
+    rect.setAttribute("height", "35");
+    rect.setAttribute("y", "520");
+    rect.setAttribute("class", "underline");
+
+    base.appendChild(rect);
+    return base;
+};
+
+/* Création des phonygles */
+
+const makePhonygle = (PhonygleObject) => {
+    const options = {
+        compose: PhonygleObject.compose,
+        inbox: PhonygleObject.inbox,
+        outbox: PhonygleObject.outbox,
+        reverse: PhonygleObject.reverse,
+    };
+    const base = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    let width = 100;
+    let pattern = (() => {
+        switch (PhonygleObject.pattern) {
+            case "a":
+                width = 500;
+                break;
+            case "e":
+                width = 430;
+                break;
+            case "i":
+                width = 405;
+                break;
+            case "o":
+                width = 300;
+                break;
+            case "q":
+                width = 395;
+                break;
         }
-        else if (outbox.includes(temp[j])) {
-          addOutbox(temp[j]);
+        return makePattern(PhonygleObject.pattern);
+    })();
+
+    let offset = 0;
+    if (options.compose) {
+        switch (options.compose) {
+            case "a":
+            case "o":
+                offset = 200
+                width += 200;
+                break;
+            case "e":
+                offset = 160
+                width += 160;
+                break;
+            case "i":
+                offset = 150
+                width += 150;
+                break;
+            default:
+                break;
         }
-        else if (inbox.includes(temp[j])) {
-          addInbox(temp[j]);
+        const compose = makePattern(options.compose);
+        base.appendChild(compose);
+    }
+
+    base.setAttribute("viewBox", `0 0 ${width} 555`);
+
+    if (options.inbox && options.inbox.length === 1) {
+        pattern.appendChild(
+            makeInbox(PhonygleObject.inbox[0], PhonygleObject.pattern)
+        );
+    } else if (options.inbox && options.inbox.length === 2) {
+        pattern.appendChild(
+            makeInbox(PhonygleObject.inbox[0], PhonygleObject.pattern, 1)
+        );
+        pattern.appendChild(
+            makeInbox(PhonygleObject.inbox[1], PhonygleObject.pattern, 2)
+        );
+    }
+
+    pattern.setAttribute("x", offset - 5);
+
+    base.appendChild(pattern);
+
+    if (options.outbox) {
+        const outbox = makeOutbox(PhonygleObject.pattern, options.outbox);
+        outbox.setAttribute("x", width - 60);
+        base.appendChild(outbox);
+    }
+
+    if (options.reverse) {
+        addReverse(base);
+    }
+
+    return base;
+};
+
+/* Fonction de rendu */
+
+const parseCommand = (command = "") => {
+    const phonyglesList = [];
+    const tokens = command.toLowerCase().split("");
+
+
+    tokens.forEach((token) => {
+        if (PATERNS.includes(token)) {
+            const lastPhonygle = phonyglesList.pop()
+
+            // Gère la composition de patterns
+            let toCompose = ""
+            if (lastPhonygle && lastPhonygle.inbox.length === 0) {
+                toCompose = lastPhonygle.pattern
+            } else if (lastPhonygle) {
+                phonyglesList.push(lastPhonygle)
+            }
+            
+
+            phonyglesList.push({
+                pattern: token,
+                compose: toCompose,
+                inbox: [],
+                outbox: "",
+                reverse: false,
+            });
+            toCompose = ""
+        } else if (INBOXES.includes(token)) {
+            const lastPhonygle = phonyglesList.pop();
+            // If the last phonygle is undefined, we need to create a new phonygle
+            // If the last phonygle has an inbox of length 2, we need to create a new phonygle
+            if (!lastPhonygle || lastPhonygle.inbox.length >= 2) {
+                // if the last phonygle is not undefined, we need to push it back to the list
+                if (lastPhonygle) {
+                    phonyglesList.push(lastPhonygle);
+                }
+                phonyglesList.push({
+                    pattern: "q",
+                    compose: "",
+                    inbox: [token],
+                    outbox: "",
+                    reverse: false,
+                });
+                return;
+            }
+            lastPhonygle.inbox.push(token);
+            phonyglesList.push(lastPhonygle);
+        } else if (OUTBOXES.includes(token)) {
+            const lastPhonygle = phonyglesList.pop();
+            if (!lastPhonygle) {
+                return;
+            }
+            lastPhonygle.outbox = token;
+            phonyglesList.push(lastPhonygle);
+        } else if (token === "*" || token === "µ" || token == "_" || token==="²") {
+            const lastPhonygle = phonyglesList.pop();
+            if (!lastPhonygle) {
+                return;
+            }
+            lastPhonygle.reverse = true;
+            phonyglesList.push(lastPhonygle);
+        } else if (token === " ") {
+            phonyglesList.push({
+                pattern: " ",
+                compose: "",
+                inbox: [" ", " "],
+                outbox: "",
+                reverse: false,
+            });
         }
-        else if (temp[j] === "*") {
-          compose();
-        }
-        else if (temp[j] === "_" || temp[j] === ".") {
-          addOutline();
-        }
-      }
-      if (temp.size !== 0)
-      {
-        addOutline();
-      }
-      temp = [];
-    }
-    else if (temp.includes("(")) {
-      continue;
-    }
-    else if (string[i] === "q") {
-      createPhonygle("muet");
-    }
-    else if (string[i] === "k") {
-      addInbox("muet");
-    }
-    else if (string[i] === " ") {
-      newSpace();
-    }
-    else if (string[i] === "*") {
-      compose();
-    }
-    else if (string[i] === "_" || string[i] === ".") {
-      addOutline();
-    }
-    else if (phonygles.includes(string[i])) {
-      createPhonygle(string[i]);
-    }
-    else if (outbox.includes(string[i])) {
-      addOutbox(string[i]);
-    }
-    else if (inbox.includes(string[i])) {
-      addInbox(string[i]);
-    }
-    else {
-      console.error("Erreur : caractère (" + string[i] + ") non reconnu.");
-    }
-  }
-}
+    });
+
+    return phonyglesList;
+};
+
+const render = (element, command) => {
+    element.innerHTML = "";
+    parseCommand(command).forEach((phonygle) => {
+        element.appendChild(makePhonygle(phonygle));
+    });
+
+    // const phonygle = makePhonygle({
+    //     pattern: "o",
+    //     compose: "i",
+    //     inbox: ["f", "d"],
+    //     outbox: "u",
+    //     reverse: true,
+    // });
+    // element.appendChild(phonygle);
+    // element.appendChild(
+    //     makePhonygle({
+    //         pattern: "e",
+    //         inbox: ["b", "b"],
+    //         outbox: "u",
+    //         reverse: true,
+    //     })
+    // );
+    // element.appendChild(
+    //     makePhonygle({
+    //         pattern: "i",
+    //         inbox: ["b", "b"],
+    //         outbox: "u",
+    //         reverse: true,
+    //     })
+    // );
+    // element.appendChild(
+    //     makePhonygle({
+    //         pattern: "o",
+    //         inbox: ["b"],
+    //         outbox: "u",
+    //         reverse: true,
+    //     })
+    // );
+    // element.appendChild(
+    //     makePhonygle({
+    //         pattern: "q",
+    //         inbox: ["b", "b"],
+    //         outbox: "u",
+    //         reverse: true,
+    //     })
+    // );
+};
 
 
-function clear() {
-  let workspace = document.querySelector(".workspace");
-  workspace.innerHTML = "";
-  createline();
-}
-
-//keyboards events
-
-let disable = false;
-
-let input = document.querySelector("input");
-input.addEventListener("focus", () => {
-  disable = true;
-});
-
-input.addEventListener("focusout", () => {
-  disable = false;
-});
-
-input.addEventListener("input", () => {
-  clear();
-  if (input.value.slice(-1) === "(") {
-    input.value = input.value += ")";
-    input.setSelectionRange(input.value.length - 1, input.value.length - 1);
-  }
-  parser(input.value);
-});
-
-let clear_button = document.querySelector("#clear");
-clear_button.addEventListener("click", () => {
-  clear();
-  input.value = "";
-});
-
-document.addEventListener("keydown", (event) => {
-
-  if (disable) {
-    return;
-  }
-
-  switch (event.code) {
-    case "Space":
-      newSpace();
-      input.value = input.value += " ";
-      break;
-    case "Backspace":
-      
-      succeded = removeLastPhonygle();
-      if (!succeded) {
-        return;
-      }
-      while (!phonygles.includes(input.value.slice(-1))) {
-        input.value = input.value.slice(0, -1);
-      }
-      input.value = input.value.slice(0, -1);
-      break;
-    case "Backslash":
-      compose();
-      input.value = input.value += "*";
-      break;
-
-    // Phonygles
-
-    case "KeyQ":
-      createPhonygle("a");
-      input.value = input.value += "a";
-      break;
-    case "KeyE":
-      createPhonygle("e");
-      input.value = input.value += "e";
-      break;
-    case "KeyI":
-      createPhonygle("i");
-      input.value = input.value += "i";
-      break;
-    case "KeyO":
-      createPhonygle("o");
-      input.value = input.value += "o";
-      break;
-    case "KeyA":
-      createPhonygle("muet");
-      input.value = input.value += "q";
-      break;
-    
-    // Outbox
-
-    case "KeyZ":
-      addOutbox("w");
-      input.value = input.value += "w";
-      break;
-    case "KeyU":
-      addOutbox("u");
-      input.value = input.value += "u";
-      break;
-    case "KeyY":
-      addOutbox("y");
-      input.value = input.value += "y";
-      break;
-
-    // Inbox
-
-    case "KeyW":
-      addInbox("z");
-      input.value = input.value += "z";
-      break;
-    case "KeyR":
-      addInbox("r");
-      input.value = input.value += "r";
-      break;
-    case "KeyT":
-      addInbox("t");
-      input.value = input.value += "t";
-      break;
-    case "KeyP":
-      addInbox("p");
-      input.value = input.value += "p";
-      break;
-    case "KeyS":
-      addInbox("s");
-      input.value = input.value += "s";
-      break;
-    case "KeyD":
-      addInbox("d");
-      input.value = input.value += "d";
-      break;
-    case "KeyF":
-      addInbox("f");
-      input.value = input.value += "f";
-      break;
-    case "KeyG":
-      addInbox("g");
-      input.value = input.value += "g";
-      break;
-    case "KeyH":
-      addInbox("h");
-      input.value = input.value += "h";
-      break;
-    case "KeyJ":
-      addInbox("j");
-      input.value = input.value += "j";
-      break;
-    case "KeyL":
-      addInbox("l");
-      input.value = input.value += "l";
-      break;
-    case "Semicolon":
-      addInbox("m");
-      input.value = input.value += "m";
-      break;
-    case "KeyC":
-      addInbox("c");
-      input.value = input.value += "c";
-      break;
-    case "KeyV":
-      addInbox("v");
-      input.value = input.value += "v";
-      break;
-    case "KeyB":
-      addInbox("b");
-      input.value = input.value += "b";
-      break;
-    case "KeyN":
-      addInbox("n");
-      input.value = input.value += "n";
-      break;
-    case "KeyK":
-      addInbox("muet");
-      input.value = input.value += "k";
-      break;
-  
-    // Underline
-
-    case "ShiftRight":
-      addOutline();
-      input.value = input.value += "_";
-      break;
-    
-    // New line
-    case "Enter":
-      createline();
-      input.value = input.value += "\n";
-      break;
-
-    
-    default:
-      break;
-  }
-
-});
-
-
-//toolbar
-//zoom
-
-let zoomIn = document.querySelector("#zoomIn");
-let zoomOut = document.querySelector("#zoomOut");
-zoomIn.addEventListener("click", () => {
-  let phonygle = document.querySelectorAll(".phonygle");
-  phonygle.forEach(function (element) {
-    element.style.zoom = (
-      parseFloat(window.getComputedStyle(element).zoom) + 0.1
-    ).toString();
-  });
-});
-zoomOut.addEventListener("click", () => {
-  let phonygle = document.querySelectorAll(".phonygle");
-  phonygle.forEach(function (element) {
-    element.style.zoom = (
-      parseFloat(window.getComputedStyle(element).zoom) - 0.1
-    ).toString();
-  });
-});
+export { render };
